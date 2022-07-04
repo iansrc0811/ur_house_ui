@@ -67,7 +67,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["loginUser"]),
+    ...mapActions(["loginInfoAction"]),
     userLogin() {
       this.$refs["loginForm"].validate((valid) => {
         if (valid) {
@@ -86,7 +86,7 @@ export default {
           Cookies.set("jwt", res.data.jwt);
           delete res.data["jwt"];
           const user = res.data;
-          this.loginUser(user);
+          this.loginInfoAction(user);
         })
         .catch((error) => {
           this.$message.error(error.response.data.error);

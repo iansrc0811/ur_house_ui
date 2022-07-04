@@ -7,7 +7,6 @@ const loginAPI = (email, password) => {
   });
 };
 const registerAPI = ({ first_name, last_name, email, password }) => {
-  debugger;
   return request.post("/api/v1/user/register", {
     first_name: first_name,
     last_name: last_name,
@@ -16,4 +15,8 @@ const registerAPI = ({ first_name, last_name, email, password }) => {
   });
 };
 
-export { loginAPI, registerAPI };
+const verifyTokenAPI = () => {
+  return request.get("/api/v1/user/verify_token_status");
+};
+
+export { loginAPI, registerAPI, verifyTokenAPI };

@@ -1,8 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import lodash from "lodash";
-// import Cookies from "js-cookie";
-// import { loginUser } from "@/api/auth";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -14,7 +13,7 @@ export default new Vuex.Store({
       return state.user && state.user.admin;
     },
     isLogin(state) {
-      return state.user && !lodash.isEmpty(state.user);
+      return !lodash.isEmpty(state.user);
     },
   },
   mutations: {
@@ -26,7 +25,7 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    loginUser({ commit }, user) {
+    loginInfoAction({ commit }, user) {
       commit("setUser", user);
     },
     logoutUser({ commit }) {

@@ -13,8 +13,7 @@ axios.interceptors.request.use(
       !config.url.includes("/user/login") &&
       !config.url.includes("/user/register")
     ) {
-      debugger;
-      config.headers.Authorization = `Bearer ${Cookies.get("jwtToken")}`;
+      config.headers.Authorization = `Bearer ${Cookies.get("jwt")}`;
     }
     return config;
   },
