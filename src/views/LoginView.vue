@@ -23,8 +23,9 @@
 </template>
 
 <script>
-import { loginUser } from "@/api/auth";
+import { loginAPI } from "@/api/auth";
 import Cookies from "js-cookie";
+import { mapActions } from "vuex";
 export default {
   data() {
     const validateEmail = (rule, value, callback) => {
@@ -66,6 +67,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["loginUser"]),
     userLogin() {
       this.$refs["loginForm"].validate((valid) => {
         if (valid) {
@@ -78,10 +80,13 @@ export default {
       });
     },
     submit() {
-      loginUser(this.loginForm.email, this.loginForm.password)
+      loginAPI(this.loginForm.email, this.loginForm.password)
         .then((res) => {
           this.$message.success("login success");
           Cookies.set("jwt", res.data.jwt);
+          delete res.data["jwt"];
+          const user = res.data;
+          this.loginUser(user);
         })
         .catch((error) => {
           this.$message.error(error.response.data.error);

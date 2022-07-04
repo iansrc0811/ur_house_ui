@@ -1,12 +1,22 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/login">Login</router-link>
+      <router-link v-if="isLogin" to="/">Home</router-link>
+      <router-link v-if="!isLogin" to="/signin">Login</router-link> |
+      <router-link v-if="!isLogin" to="/signup">signup</router-link>
     </nav>
     <router-view />
   </div>
 </template>
+
+<script>
+import { mapGetters } from "vuex";
+export default {
+  computed: {
+    ...mapGetters(["isLogin"]),
+  },
+};
+</script>
 
 <style>
 #app {

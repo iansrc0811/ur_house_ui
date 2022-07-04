@@ -9,7 +9,11 @@ axios.interceptors.request.use(
   (config) => {
     config.baseURL = process.env.VUE_APP_REMOTE_URL;
     config.headers.remoteSystem = "IanProject";
-    if (!config.url.includes("/user/login")) {
+    if (
+      !config.url.includes("/user/login") &&
+      !config.url.includes("/user/register")
+    ) {
+      debugger;
       config.headers.Authorization = `Bearer ${Cookies.get("jwtToken")}`;
     }
     return config;
