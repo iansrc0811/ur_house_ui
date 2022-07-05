@@ -3,8 +3,6 @@ import axios from "axios";
 // import store from "@/store";
 import Cookies from "js-cookie";
 
-axios.defaults.baseURL = "http://localhost:3000/"; // 域名
-
 axios.interceptors.request.use(
   (config) => {
     config.baseURL = process.env.VUE_APP_REMOTE_URL;

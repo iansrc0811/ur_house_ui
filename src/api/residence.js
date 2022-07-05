@@ -9,7 +9,18 @@ const getResidences = ({
   page,
   per_page,
 }) => {
-  return request.get("/api/v1/residences", {
+  console.log("residencejs");
+  console.log({
+    city_id,
+    district_id,
+    room_number,
+    price_min,
+    price_max,
+    mrt,
+    page,
+    per_page,
+  });
+  const params = {
     city_id: city_id,
     district_id: district_id,
     room_number: room_number,
@@ -18,7 +29,8 @@ const getResidences = ({
     mrt: mrt,
     page: page,
     per_page: per_page,
-  });
+  };
+  return request.get("/api/v1/residences", { params });
 };
 
 export { getResidences };
