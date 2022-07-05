@@ -13,6 +13,10 @@ axios.interceptors.request.use(
       !config.url.includes("/user/login") &&
       !config.url.includes("/user/register")
     ) {
+      const jwt = Cookies.get("jwt");
+      if (!jwt) {
+        throw new Error("Token not found or invalid");
+      }
       config.headers.Authorization = `Bearer ${Cookies.get("jwt")}`;
     }
     return config;

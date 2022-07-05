@@ -15,8 +15,12 @@ const registerAPI = ({ first_name, last_name, email, password }) => {
   });
 };
 
+const logoutAPI = () => {
+  return request.delete("/api/v1/user/logout");
+};
+
 const verifyTokenAPI = () => {
   return request.get("/api/v1/user/verify_token_status");
 };
 
-export { loginAPI, registerAPI, verifyTokenAPI };
+export { loginAPI, registerAPI, logoutAPI, verifyTokenAPI };

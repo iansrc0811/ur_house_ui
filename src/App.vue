@@ -2,9 +2,9 @@
   <div id="app">
     <nav>
       <router-link v-if="isLogin" to="/">Home</router-link>
-      <router-link v-if="!isLogin" to="/signin">Login</router-link> |
+      <router-link v-if="!isLogin" to="/signin">Login</router-link>
       <router-link v-if="!isLogin" to="/signup">signup</router-link>
-      <div v-if="isLogin" @click="logout">logout</div>
+      <a v-if="isLogin" herf="" @click="logout">logout</a>
     </nav>
     <router-view />
   </div>
@@ -13,7 +13,7 @@
 <script>
 import { mapGetters } from "vuex";
 import Cookies from "js-cookie";
-import { verifyTokenAPI } from "@/api/auth";
+import { verifyTokenAPI, logoutAPI } from "@/api/auth";
 import { mapActions } from "vuex";
 export default {
   mounted() {
@@ -41,7 +41,22 @@ export default {
   },
   methods: {
     ...mapActions(["loginInfoAction"]),
-    logout() {},
+    logout() {
+      logoutAPI()
+        .then(() => {
+          Cookies.remove("jwt");
+          this.loginInfoAction({});
+          this.$message.success("Logout success");
+        })
+        .catch((error) => {
+          this.$message.error(error.message);
+        })
+        .finally(() => {
+          Cookies.remove("jwt");
+          this.loginInfoAction({});
+          this.$router.push("/");
+        });
+    },
   },
 };
 </script>
