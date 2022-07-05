@@ -1,9 +1,9 @@
 <template>
   <div class="residences">
-    <el-form :model="filterForm" class="filter-form">
+    <el-form :model="residenceForm" class="residence-form">
       <div class="form-scope">
         <el-form-item label="City" class="margin-selector">
-          <el-select v-model="filterForm.cityId" placeholder="">
+          <el-select v-model="residenceForm.cityId" placeholder="">
             <el-option
               v-for="item in cities"
               :key="item.id"
@@ -15,7 +15,11 @@
         </el-form-item>
 
         <el-form-item label="District">
-          <el-select v-model="filterForm.districtIds" multiple placeholder="">
+          <el-select
+            v-model="residenceForm.districtIds"
+            multiple
+            placeholder=""
+          >
             <el-option
               v-for="item in districtOptions"
               :key="item.id"
@@ -28,20 +32,20 @@
       </div>
       <div class="form-scope">
         <el-form-item label="Rent from" class="margin-selector">
-          <el-input v-model="filterForm.priceMin"></el-input>
+          <el-input v-model="residenceForm.priceMin"></el-input>
         </el-form-item>
         <el-form-item label="Rent to">
-          <el-input v-model="filterForm.priceMax"></el-input>
+          <el-input v-model="residenceForm.priceMax"></el-input>
         </el-form-item>
       </div>
 
       <div class="form-scope">
         <el-form-item label="Bedroom Number" class="margin-selector">
-          <el-input v-model="filterForm.roomNumber"></el-input>
+          <el-input v-model="residenceForm.roomNumber"></el-input>
         </el-form-item>
 
         <el-form-item label="MRT line">
-          <el-input v-model="filterForm.mrt"></el-input>
+          <el-input v-model="residenceForm.mrt"></el-input>
         </el-form-item>
       </div>
       <el-button @click="filter">Filter</el-button>
@@ -67,7 +71,7 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-import { getResidences } from "@/api/residence";
+import { residenceIndex } from "@/api/residence";
 import ResidenceItem from "@/components/ResidenceItem";
 import request from "@/utils/request";
 import { isNil } from "@/utils/shareFunction";
@@ -76,23 +80,22 @@ export default {
   components: {
     ResidenceItem,
   },
-
   computed: {
     ...mapState(["cities", "districts"]),
-    watch: {
-      "filterForm.cityId": {
-        handler() {
-          this.filterForm.districtIds = [];
-        },
-      },
-    },
     districtOptions() {
-      if (this.filterForm.cityId) {
+      if (this.residenceForm.cityId) {
         return this.districts.filter(
-          (item) => item.city_id === this.filterForm.cityId
+          (item) => item.city_id === this.residenceForm.cityId
         );
       }
       return this.districts;
+    },
+  },
+  watch: {
+    "residenceForm.cityId": {
+      handler() {
+        this.residenceForm.districtIds = [];
+      },
     },
   },
   data() {
@@ -101,7 +104,7 @@ export default {
       total: 0,
       page: 1,
       perPage: 24,
-      filterForm: {
+      residenceForm: {
         cityId: null,
         districtIds: [],
         roomNumber: null,
@@ -113,7 +116,7 @@ export default {
     };
   },
   async created() {
-    getResidences({
+    residenceIndex({
       page: this.page,
       per_page: this.perPage,
     }).then((res) => {
@@ -126,17 +129,17 @@ export default {
     ...mapActions(["getCitiesDistricts"]),
     filter() {
       let params = {
-        city_id: this.filterForm.cityId,
-        district_ids: this.filterForm.districtIds,
-        room_number: this.filterForm.roomNumber,
-        price_min: this.filterForm.priceMin,
-        price_max: this.filterForm.priceMax,
-        mrt: this.filterForm.mrt,
+        city_id: this.residenceForm.cityId,
+        district_ids: this.residenceForm.districtIds,
+        room_number: this.residenceForm.roomNumber,
+        price_min: this.residenceForm.priceMin,
+        price_max: this.residenceForm.priceMax,
+        mrt: this.residenceForm.mrt,
         page: this.page,
         per_page: this.perPage,
       };
       params = this._.omitBy({ ...params }, isNil);
-      getResidences({ ...params })
+      residenceIndex({ ...params })
         .then((res) => {
           this.residences = res.data.items;
           this.total = res.data.total;
@@ -153,7 +156,8 @@ export default {
 };
 </script>
 <style scoped>
-.filter-form {
+@import "@/styles/form.css";
+/* .residence-form {
   padding: 10px;
   width: 90%;
 }
@@ -164,7 +168,7 @@ export default {
   display: flex;
   justify-content: flex-start;
 }
-.filter-form {
+.residence-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -173,5 +177,5 @@ export default {
 .residences {
   display: flex;
   flex-direction: column;
-}
+} */
 </style>

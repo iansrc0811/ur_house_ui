@@ -1,7 +1,7 @@
 import request from "@/utils/request";
-const getResidences = ({
+const residenceIndex = ({
   city_id,
-  district_id,
+  district_ids,
   room_number,
   price_min,
   price_max,
@@ -11,7 +11,7 @@ const getResidences = ({
 }) => {
   const params = {
     city_id: city_id,
-    district_id: district_id,
+    district_ids: district_ids,
     room_number: room_number,
     price_min: price_min,
     price_max: price_max,
