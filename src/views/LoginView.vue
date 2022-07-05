@@ -87,6 +87,7 @@ export default {
           delete res.data["jwt"];
           const user = res.data;
           this.loginInfoAction(user);
+          this.$router.push({ name: "residences" });
         })
         .catch((error) => {
           this.$message.error(error.response.data.error);

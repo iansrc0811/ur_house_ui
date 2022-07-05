@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav>
-      <router-link v-if="isLogin" to="/">Home</router-link>
+      <router-link v-if="isLogin" to="/">Residents</router-link> |
       <router-link v-if="!isLogin" to="/signin">Login</router-link>
       <router-link v-if="!isLogin" to="/signup">signup</router-link>
       <a v-if="isLogin" herf="" @click="logout">logout</a>
@@ -29,6 +29,7 @@ export default {
         delete res.data["jwt"];
         const user = res.data;
         this.loginInfoAction(user);
+        this.$router.push({ name: "residences" });
       })
       .catch(() => {
         Cookies.remove("jwt");
@@ -45,6 +46,7 @@ export default {
       logoutUser()
         .then(() => {
           this.$message.success("Logout success");
+          this.$router.push({ name: "signin" });
         })
         .catch((error) => {
           this.$message.error(error.message);
@@ -52,7 +54,6 @@ export default {
         .finally(() => {
           Cookies.remove("jwt");
           this.loginInfoAction({});
-          this.$router.push("/");
         });
     },
   },
