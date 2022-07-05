@@ -1,20 +1,20 @@
 <template>
   <div id="app">
     <nav>
-      <router-link v-if="isLogin" to="/">Residents</router-link> |
-      <router-link v-if="!isLogin" to="/signin">Login</router-link>
+      <router-link v-if="isLogin" to="/">Residents</router-link>
+      <router-link v-if="!isLogin" to="/signin">Login</router-link> /
       <router-link v-if="!isLogin" to="/signup">signup</router-link>
       <a v-if="isLogin" herf="" @click="logout">logout</a>
+      <p id="admin" v-if="isAdmin">Admin User</p>
     </nav>
     <router-view />
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import Cookies from "js-cookie";
 import { verifyToken, logoutUser } from "@/api/auth";
-import { mapActions } from "vuex";
 export default {
   mounted() {
     // verify token, if still valid, get user info to vuex
@@ -38,7 +38,7 @@ export default {
       });
   },
   computed: {
-    ...mapGetters(["isLogin"]),
+    ...mapGetters(["isLogin", "isAdmin"]),
   },
   methods: {
     ...mapActions(["loginInfoAction"]),
@@ -80,5 +80,12 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+nav {
+  margin-top: 40px;
+}
+#admin {
+  color: #fa0909;
+  font-weight: bold;
 }
 </style>

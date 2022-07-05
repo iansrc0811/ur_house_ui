@@ -1,5 +1,5 @@
 import axios from "axios";
-// import router from "@/router";
+import router from "@/router";
 // import store from "@/store";
 import Cookies from "js-cookie";
 
@@ -29,6 +29,9 @@ axios.interceptors.response.use(
     return res;
   },
   (error) => {
+    if (error.response.status === 401) {
+      router.push({ name: "signin" });
+    }
     return Promise.reject(error);
   }
 );
