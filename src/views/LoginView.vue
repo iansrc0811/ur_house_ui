@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { loginAPI } from "@/api/auth";
+import { loginUser } from "@/api/auth";
 import Cookies from "js-cookie";
 import { mapActions } from "vuex";
 export default {
@@ -80,7 +80,7 @@ export default {
       });
     },
     submit() {
-      loginAPI(this.loginForm.email, this.loginForm.password)
+      loginUser(this.loginForm.email, this.loginForm.password)
         .then((res) => {
           this.$message.success("login success");
           Cookies.set("jwt", res.data.jwt);

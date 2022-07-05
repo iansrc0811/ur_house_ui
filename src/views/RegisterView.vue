@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { registerAPI } from "@/api/auth";
+import { registerUser } from "@/api/auth";
 import Cookies from "js-cookie";
 import { mapActions } from "vuex";
 export default {
@@ -134,7 +134,7 @@ export default {
       });
     },
     submit() {
-      registerAPI({ ...this.registerForm })
+      registerUser({ ...this.registerForm })
         .then((res) => {
           this.$message.success("register success");
           Cookies.set("jwt", res.data.jwt);

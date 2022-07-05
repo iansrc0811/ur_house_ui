@@ -13,7 +13,7 @@
 <script>
 import { mapGetters } from "vuex";
 import Cookies from "js-cookie";
-import { verifyTokenAPI, logoutAPI } from "@/api/auth";
+import { verifyToken, logoutUser } from "@/api/auth";
 import { mapActions } from "vuex";
 export default {
   mounted() {
@@ -23,7 +23,7 @@ export default {
       Cookies.remove("jwt");
       return;
     }
-    verifyTokenAPI()
+    verifyToken()
       .then((res) => {
         Cookies.set("jwt", res.data.jwt);
         delete res.data["jwt"];
@@ -42,10 +42,8 @@ export default {
   methods: {
     ...mapActions(["loginInfoAction"]),
     logout() {
-      logoutAPI()
+      logoutUser()
         .then(() => {
-          Cookies.remove("jwt");
-          this.loginInfoAction({});
           this.$message.success("Logout success");
         })
         .catch((error) => {
