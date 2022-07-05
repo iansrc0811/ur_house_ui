@@ -9,17 +9,6 @@ const getResidences = ({
   page,
   per_page,
 }) => {
-  console.log("residencejs");
-  console.log({
-    city_id,
-    district_id,
-    room_number,
-    price_min,
-    price_max,
-    mrt,
-    page,
-    per_page,
-  });
   const params = {
     city_id: city_id,
     district_id: district_id,
