@@ -22,4 +22,26 @@ const residenceIndex = ({
   return request.get("/api/v1/residences", { params });
 };
 
-export { getResidences };
+const residenceShow = (id) => {
+  return request.get(`/api/v1/residences/${id}`);
+};
+
+const residenceEdit = ({
+  id,
+  city_id,
+  district_id,
+  room_number,
+  price,
+  mrt,
+}) => {
+  const params = {
+    id: id,
+    city_id: city_id,
+    district_id: district_id,
+    room_number: room_number,
+    price: price,
+    mrt: mrt,
+  };
+  return request.patch(`/api/v1/residences`, params);
+};
+export { residenceIndex, residenceShow, residenceEdit };

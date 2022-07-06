@@ -4,6 +4,7 @@ import store from "@/store";
 const ResidenceView = () => import("../views/ResidenceView.vue");
 const LoginView = () => import("../views/LoginView.vue");
 const RegisterView = () => import("../views/RegisterView.vue");
+const ResidenceEditView = () => import("../views/ResidenceEditView.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -18,6 +19,11 @@ const routes = [
     path: "/residences",
     name: "residences",
     component: ResidenceView,
+  },
+  {
+    path: "/residences/:id",
+    name: "editResidence",
+    component: ResidenceEditView,
   },
   {
     path: "/signin",

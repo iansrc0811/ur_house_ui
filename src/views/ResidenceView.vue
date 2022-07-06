@@ -2,7 +2,7 @@
   <div class="residences">
     <el-form :model="residenceForm" class="residence-form">
       <div class="form-scope">
-        <el-form-item label="City" class="margin-selector">
+        <el-form-item label="City" class="margin-right-20">
           <el-select v-model="residenceForm.cityId" placeholder="">
             <el-option
               v-for="item in cities"
@@ -31,7 +31,7 @@
         </el-form-item>
       </div>
       <div class="form-scope">
-        <el-form-item label="Rent from" class="margin-selector">
+        <el-form-item label="Rent from" class="margin-right-20">
           <el-input v-model="residenceForm.priceMin"></el-input>
         </el-form-item>
         <el-form-item label="Rent to">
@@ -40,7 +40,7 @@
       </div>
 
       <div class="form-scope">
-        <el-form-item label="Bedroom Number" class="margin-selector">
+        <el-form-item label="Bedroom Number" class="margin-right-20">
           <el-input v-model="residenceForm.roomNumber"></el-input>
         </el-form-item>
 
@@ -48,7 +48,7 @@
           <el-input v-model="residenceForm.mrt"></el-input>
         </el-form-item>
       </div>
-      <el-button @click="filter">Filter</el-button>
+      <el-button type="primary" @click="filter">Filter</el-button>
     </el-form>
 
     <el-row :gutter="20">
@@ -157,25 +157,4 @@ export default {
 </script>
 <style scoped>
 @import "@/styles/form.css";
-/* .residence-form {
-  padding: 10px;
-  width: 90%;
-}
-.margin-selector {
-  margin-right: 20px;
-}
-.form-scope {
-  display: flex;
-  justify-content: flex-start;
-}
-.residence-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-}
-.residences {
-  display: flex;
-  flex-direction: column;
-} */
 </style>

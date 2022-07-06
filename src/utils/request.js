@@ -30,7 +30,7 @@ axios.interceptors.response.use(
   },
   (error) => {
     if (error.response.status === 401) {
-      router.push({ name: "signin" });
+      if (!router.name == "signin") router.push({ name: "signin" });
     }
     return Promise.reject(error);
   }
