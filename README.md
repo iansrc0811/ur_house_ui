@@ -1,29 +1,25 @@
 # ur_house_ui
 
+
+## Version
+
+Vue.js version @^2.6.14,  
+`v2.7.1`` installed
+
+Developed in Node v16.15.1
+
 ## Project setup
+
 ```
 yarn install
 ```
 
 ### Compiles and hot-reloads for development
+
 ```
 yarn serve
 ```
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## Instructions
 
-### Run your unit tests
-```
-yarn test:unit
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+See [Instruction.md](instruction.md) to get development details
