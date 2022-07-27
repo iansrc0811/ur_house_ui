@@ -3,8 +3,8 @@
 
 ## Version
 
-Vue.js version @^2.6.14,  
-`v2.7.1`` installed
+Vue.js version @^2.6.14,
+v2.7.1 installed
 
 Developed in Node v16.15.1
 
